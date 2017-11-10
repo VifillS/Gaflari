@@ -1,37 +1,34 @@
-
-document.addEventListener('DOMContentLoaded', () => {
-  const video = new Video();
-  video.load();
-});
-
 class Video {
   /**
-   * Finnur container fyrir myndbönd og form.
+   * Finnur container fyrir myndbönd.
    * Bindur submit eventhandler við form.
    */
   constructor() {
-    this.keyName = 'countdown';
-    this.container = document.querySelector('.countdown');
-    this.form = document.querySelector('form');
-
+    this.container = document.querySelector('.video');
+    this.data = null;
+    console.log('container fundinn', this.container);
     // til þess að submit hafi þennan klasa sem "this" verðum við
     // að nota bind hér (og í öðrum föllum sem við bindum!)
-    this.form.addEventListener('submit', this.submit.bind(this));
+    // this.form.addEventListener('submit', this.submit.bind(this));
   }
 
   /**
-   * Sækir gögn úr video.json og býr til alla viðeigandi containera
+   * Sækir gögn úr videos.json og býr til alla viðeigandi containera
    * og thumbnails
    */
   load() {
-    const savedData = window.localStorage.getItem(this.keyName);
-
-    if (savedData) {
-      const parsed = JSON.parse(savedData);
-      const date = new Date(parsed.date);
-
-      this.create(parsed.title, date);
-    }
+    console.log('rass');
+    const request = new XMLHttpRequest();
+    request.open('GET', 'videos.json');
+    request.responseType = 'json';
+    request.onload = () => {
+      console.log(request);
+      this.data = request.response;
+      console.log(this.data.videos[0]);
+      console.log(this.data.categories);
+      this.create(this.data);
+    };
+    request.send();
   }
 
   /**
@@ -84,73 +81,37 @@ class Video {
    * Byrjar niðurteljara með this.startCounter() og
    * felur form með this.hideForm()
    */
-  create(title, date) {
-    this.date = date;
-
-    const h2 = document.createElement('h2');
-    h2.appendChild(document.createTextNode(title));
-    h2.classList.add('countdown__heading');
-    this.container.appendChild(h2);
-
-    const countdown = document.createElement('div');
-    this.container.appendChild(countdown);
-    this.element = countdown;
-
-    const deleteButton = document.createElement('button');
-    deleteButton.appendChild(document.createTextNode('Eyda'));
-    deleteButton.classList.add('button');
-    deleteButton.addEventListener('click', this.delete.bind(this));
-    this.container.appendChild(deleteButton);
-
-    this.startCounter();
-    this.hideForm();
+  create(data) {
+    const category = data.categories;
+    for (const key in category) {
+      console.log(key + '->' + category[key].title);
+    }
   }
 
   /**
-   * Felur form með CSS
-   */
-  hideForm() {
-    this.form.classList.add('form__hidden');
-  }
-
-  /**
-   * Sýnir form með CSS
-   */
-  showForm() {
-    this.form.classList.remove('form__hidden');
-  }
-
-  /**
-   * Byrjar niðurteljara með this.count() og keyrir á 1000ms fresti
-   * með window.setInterval og setur id á teljara í this.interval
-   */
-  startCounter() {
-    this.count();
-    this.interval = window.setInterval(this.count.bind(this), 1000);
-  }
-
-  /**
-   * Stöðvar teljara með window.clearInterval á this.interval
-   */
-  stopCounter() {
-    window.clearInterval(this.interval);
-  }
-
-  /**
-   * Býr til element sem heldur utan um teljara, á forminu:
-   * <div class="countdown__box">
-   *   <span class="countdown__num">num</span>
-   *   <span class="countdown__title">title</span>
+   * Býr til element sem heldur utan um thumbnail:
+   * <div class="videolist__box">
+   *   <a href=...>
+   *     <img src=url>
+   *   </a>
+   *   <div class="videolist__description">
+   *     <span class="videolist__description__title">title</span>
+   *     <span class="videolist__description__added">added</span>
+   *   </div>
    * </div>
    * og skilar element
    */
-  createElement(num, title) {
+  addElements(data, category){
+
+  }
+
+  createElement(url, title, date) {
     const el = document.createElement('div');
     el.classList.add('countdown__box');
 
     const numEl = document.createElement('span');
     numEl.classList.add('countdown__num');
-    numEl.appendChild(document.createTextNode(num));
+    numEl.appendChild(document.createTextNode(date));
     el.appendChild(numEl);
 
     const titleEl = document.createElement('span');
@@ -228,8 +189,7 @@ class Video {
   }
 }
 
-
-
-
-
-
+document.addEventListener('DOMContentLoaded', () => {
+  const video = new Video();
+  video.load();
+});
