@@ -1,7 +1,4 @@
-html {
-  /* stylelint-disable-line */
-  box-sizing: border-box;
-}
+@import "scss/variables"
 
 *,
 *:before,
@@ -14,24 +11,19 @@ html {
 
 html {
   /* stylelint-disable-line */
+  box-sizing: border-box;
   font-family: helvetica, arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #fff;
-  background-color: #333;
 }
 
 main {
-  /* stylelint-disable-line */
-  display: flex;
-  max-width: 1200px;
-  padding: 20px;
+  max-width: $max-width; // þar sem við erum að eiga við neikvæð margin á grid, setjum overflow-x
   margin: 0 auto;
+  // hér sem hidden, þá fáum við ekki lárétta skrunstiku
+  overflow-x: hidden;
 }
 
-h1 {
-  /* stylelint-disable-line */
-  text-align: center;
-}
-
-@import "scss/video.scss";
+@import "scss/video";
+@import "scss/grid";
+@import "scss/player";

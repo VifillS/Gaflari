@@ -1,0 +1,12 @@
+@import "scss/variables"
+
+toolbar {
+  display: flex;
+  flex-direction: row;
+  margin: $gutter/2 auto;
+
+  &_hidden {
+    visibility: hidden;
+  }
+}
+
