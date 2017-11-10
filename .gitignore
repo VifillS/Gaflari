@@ -9,3 +9,5 @@ styles.css
 *.txt
 /.idea
 settings.json
+script-compiled.js
+script-compiled.js.map

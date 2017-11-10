@@ -1,6 +1,18 @@
 .video {
-  &__container {}
-  &__box {}
-  &_added {}
-  &__title {}
+  &__heading {}
+
+  &__container {
+    display: flex;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__description {
+    display: flex;
+    &__title {}
+    &__added {}
+  }
 }
