@@ -31,12 +31,20 @@
       "duration": 220,
       "poster": "./videos/16-9.png",
       "video": "./videos/bunny.mp4"
+    },
+    {
+      "id": 5,
+      "title": "Gaflari í sundi",
+      "created": 1504904047011,
+      "duration": 212,
+      "poster": "./videos/gaflari.png",
+      "video": "./videos/roll.mp4"
     }
   ],
   "categories": [
     {
       "title": "Nýleg myndbönd",
-      "videos": [1, 2]
+      "videos": [1, 2, 5]
     },
     {
       "title": "Kennslumyndbönd",
