@@ -1,10 +1,5 @@
 
-document.addEventListener('DOMContentLoaded', () => {
-  const video = new Video();
-  video.load();
-});
-
-class Video {
+class Player {
   /**
    * Finnur container fyrir myndbönd og form.
    * Bindur submit eventhandler við form.
@@ -227,9 +222,3 @@ class Video {
     }
   }
 }
-
-
-
-
-
-
