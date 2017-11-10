@@ -1,0 +1,8 @@
+/node_modules
+/instr
+# .stylelintrc
+styles.css
+.DS_Store
+*.swp
+*.txt
+/.idea
