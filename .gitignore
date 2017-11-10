@@ -1,6 +1,8 @@
 /node_modules
 /instr
-# .stylelintrc
+.stylelintrc
+.babelrc
+.eslintrc
 styles.css
 .DS_Store
 *.swp
