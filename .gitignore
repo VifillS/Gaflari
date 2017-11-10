@@ -2,7 +2,7 @@
 /instr
 .stylelintrc
 .babelrc
-.eslintrc
+.eslintrc.js
 styles.css
 .DS_Store
 *.swp
