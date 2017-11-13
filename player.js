@@ -1,4 +1,4 @@
-const videos = JSON.parse({
+const videos = `{
   "videos": [
     {
       "id": 1,
@@ -55,18 +55,18 @@ const videos = JSON.parse({
       "videos": [2, 3, 4]
     }
   ]
-})
+}`;
 
 class Player {
-
   /**
    * Finnur container fyrir myndbönd og form.
    * Bindur submit eventhandler við form.
    */
   constructor() {
-    this.id = this.getQueryVariable('id')
-    this.container = document.querySelector('.player')
-    this.toolbar = document.querySelector('.tools')
+    this.id = this.getQueryVariable('id');
+    this.container = document.querySelector('.player');
+    this.toolbar = document.querySelector('.tools');
+    this.videos = JSON.parse(videos).videos;
 
     // gamala
     //    this.keyName = 'countdown';
@@ -81,19 +81,13 @@ class Player {
   // tekið af 'https://css-tricks.com/snippets/javascript/get-url-variables/'
   // gerir það sem það segir að það geri
   getQueryVariable(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
-      var pair = vars[i].split("=");
-      if(pair[0] == variable){return pair[1];}
+    const query = window.location.search.substring(1);
+    const vars = query.split('&');
+    for (let i = 0; i < vars.length; i += 1) {
+      const pair = vars[i].split('=');
+      if (pair[0] === variable) { return pair[1]; }
     }
-    return(false);
-  }
-
-  getVideoByID(id) {
-    return videos.filter(
-      (videos) => { return videos.id = id }
-    )
+    return (false);
   }
 
   /**
@@ -101,11 +95,13 @@ class Player {
    * og thumbnails
    */
   load() {
-    const video = getVideoByID(this.id)
+    const video = this.videos[this.id];
 
-    const vidEl = document.createElement('video')
-    vidEl.setAttribute('src',video.video)
-    this.container.appendChild(vidEl)
+    const vidEl = document.createElement('video');
+    vidEl.setAttribute('src', video.video);
+    // vidEl.setAttribute('autoplay','True');
+    vidEl.setAttribute('controls', 'True');
+    this.container.prepend(vidEl);
 
     // const savedData = window.localStorage.getItem(this.keyName);
 

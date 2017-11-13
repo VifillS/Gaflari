@@ -1,60 +1,12 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var videos = JSON.parse({
-  "videos": [{
-    "id": 1,
-    "title": "Lego!",
-    "created": 1509804047011,
-    "duration": 5,
-    "poster": "./videos/small.png",
-    "video": "./videos/small.mp4"
-  }, {
-    "id": 2,
-    "title": "Big Bunny",
-    "created": 1507804047011,
-    "duration": 62,
-    "poster": "./videos/bunny.png",
-    "video": "./videos/bunny.mp4"
-  }, {
-    "id": 3,
-    "title": "Prufu myndband",
-    "created": 1505904047011,
-    "duration": 3600,
-    "poster": "./videos/16-9.png",
-    "video": "./videos/bunny.mp4"
-  }, {
-    "id": 4,
-    "title": "Prufu myndband með löngum texta sem fer í tvær línur",
-    "created": 1504904047011,
-    "duration": 220,
-    "poster": "./videos/16-9.png",
-    "video": "./videos/bunny.mp4"
-  }, {
-    "id": 5,
-    "title": "Gaflari í sundi",
-    "created": 1504904047011,
-    "duration": 212,
-    "poster": "./videos/gaflari.png",
-    "video": "./videos/rickrolled.mp4"
-  }],
-  "categories": [{
-    "title": "Nýleg myndbönd",
-    "videos": [1, 2, 5]
-  }, {
-    "title": "Kennslumyndbönd",
-    "videos": [1, 3, 4]
-  }, {
-    "title": "Skemmtimyndbönd",
-    "videos": [2, 3, 4]
-  }]
-});
+var videos = '{\n  "videos": [\n    {\n      "id": 1,\n      "title": "Lego!",\n      "created": 1509804047011,\n      "duration": 5,\n      "poster": "./videos/small.png",\n      "video": "./videos/small.mp4"\n    },\n    {\n      "id": 2,\n      "title": "Big Bunny",\n      "created": 1507804047011,\n      "duration": 62,\n      "poster": "./videos/bunny.png",\n      "video": "./videos/bunny.mp4"\n    },\n    {\n      "id": 3,\n      "title": "Prufu myndband",\n      "created": 1505904047011,\n      "duration": 3600,\n      "poster": "./videos/16-9.png",\n      "video": "./videos/bunny.mp4"\n    },\n    {\n      "id": 4,\n      "title": "Prufu myndband me\xF0 l\xF6ngum texta sem fer \xED tv\xE6r l\xEDnur",\n      "created": 1504904047011,\n      "duration": 220,\n      "poster": "./videos/16-9.png",\n      "video": "./videos/bunny.mp4"\n    },\n    {\n      "id": 5,\n      "title": "Gaflari \xED sundi",\n      "created": 1504904047011,\n      "duration": 212,\n      "poster": "./videos/gaflari.png",\n      "video": "./videos/rickrolled.mp4"\n    }\n  ],\n  "categories": [\n    {\n      "title": "N\xFDleg myndb\xF6nd",\n      "videos": [1, 2, 5]\n    },\n    {\n      "title": "Kennslumyndb\xF6nd",\n      "videos": [1, 3, 4]\n    },\n    {\n      "title": "Skemmtimyndb\xF6nd",\n      "videos": [2, 3, 4]\n    }\n  ]\n}';
 
 var Player = function () {
-
   /**
    * Finnur container fyrir myndbönd og form.
    * Bindur submit eventhandler við form.
@@ -65,6 +17,7 @@ var Player = function () {
     this.id = this.getQueryVariable('id');
     this.container = document.querySelector('.player');
     this.toolbar = document.querySelector('.tools');
+    this.videos = JSON.parse(videos).videos;
 
     // gamala
     //    this.keyName = 'countdown';
@@ -81,24 +34,17 @@ var Player = function () {
 
 
   _createClass(Player, [{
-    key: "getQueryVariable",
+    key: 'getQueryVariable',
     value: function getQueryVariable(variable) {
       var query = window.location.search.substring(1);
-      var vars = query.split("&");
-      for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] == variable) {
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i += 1) {
+        var pair = vars[i].split('=');
+        if (pair[0] === variable) {
           return pair[1];
         }
       }
       return false;
-    }
-  }, {
-    key: "getVideoByID",
-    value: function getVideoByID(id) {
-      return videos.filter(function (videos) {
-        return videos.id = id;
-      });
     }
 
     /**
@@ -107,13 +53,15 @@ var Player = function () {
      */
 
   }, {
-    key: "load",
+    key: 'load',
     value: function load() {
-      var video = getVideoByID(this.id);
+      var video = this.videos[this.id];
 
       var vidEl = document.createElement('video');
       vidEl.setAttribute('src', video.video);
-      this.container.appendChild(vidEl);
+      // vidEl.setAttribute('autoplay','True');
+      vidEl.setAttribute('controls', 'True');
+      this.container.prepend(vidEl);
 
       // const savedData = window.localStorage.getItem(this.keyName);
 
