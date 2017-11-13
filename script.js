@@ -101,7 +101,7 @@ class Video {
    * </div>
    * og skilar element
    */
-  addElements(data, category){
+  addElements(data, category) {
 
   }
 
