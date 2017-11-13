@@ -4,7 +4,7 @@ class Video {
    * Bindur submit eventhandler við form.
    */
   constructor() {
-    this.container = document.querySelector('.video');
+    this.container = document.querySelector('.videolist');
     this.data = null;
     console.log('container fundinn', this.container);
     // til þess að submit hafi þennan klasa sem "this" verðum við
