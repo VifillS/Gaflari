@@ -4,21 +4,48 @@ body {
   background-color: #333;
 }
 
+video {
+  margin: 0 auto;
+  max-width: 920px;
+  display: block;
+}
+
+.title {
+  color: #fff;
+  margin-top: 1 * $gutter;
+  margin-bottom: 1 * $gutter;
+  text-align: center;
+}
+
 .toolbar {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: $gutter/2 auto;
-  
+
   .button {
     max-height: 5*$gutter;
     max-width: 5*$gutter;
     margin: $gutter/2;
+    cursor: pointer;
 
     &_hidden {
       display: none;
     }
   }
 
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2 * $gutter;
+  margin-bottom: 2 * $gutter;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.5 * $fsize;
+  }
 }
 
