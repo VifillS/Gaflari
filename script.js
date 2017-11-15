@@ -30,13 +30,8 @@ class Video {
    * Skilar streng sem lýsir hversu gamall hluturinn er
    */
   parseDate(date) {
-    console.log(new Date(date));
-    console.log(new Date());
     const seconds = Math.floor((new Date() - date) / 1000);
-    console.log('seconds', seconds);
-    console.log((60 * 60 * 24 * 7));
     const weeks = Math.floor(seconds / (60 * 60 * 24 * 7));
-    console.log(weeks);
     if (weeks > 1) {
       return ('Fyrir ').concat(weeks.toString().concat(' vikum síðan'));
     }
