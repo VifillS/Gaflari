@@ -57,26 +57,13 @@ const videos = `{
   ]
 }`;
 
-// TODO: taka ut controls
 class Player {
-  /**
-   * Finnur container fyrir myndbönd og form.
-   * Bindur submit eventhandler við form.
-   */
+
   constructor() {
     this.id = this.getQueryVariable('id');
-    this.container = document.querySelector('.player');
+    this.container = document.querySelector('.video');
     this.videos = JSON.parse(videos).videos;
     this.video;
-
-    // gamala
-    //    this.keyName = 'countdown';
-    //    this.container = document.querySelector('.countdown');
-    //    this.form = document.querySelector('form');
-    //
-    //    // til þess að submit hafi þennan klasa sem "this" verðum við
-    //    // að nota bind hér (og í öðrum föllum sem við bindum!)
-    //    this.form.addEventListener('submit', this.submit.bind(this));
   }
 
   // tekið af 'https://css-tricks.com/snippets/javascript/get-url-variables/'
@@ -106,38 +93,37 @@ class Player {
     const vidEl = document.createElement('video');
     vidEl.setAttribute('src', video.video);
     vidEl.setAttribute('poster', video.poster);
-    vidEl.setAttribute('controls', 'True');
-    //this.video = vidEl;
-    this.container.prepend(vidEl);
+    //vidEl.setAttribute('controls', 'True');
+    this.video = vidEl;
+    this.container.appendChild(vidEl);
 
     // setja eventlistenera
-    document.getElementById('playPause').addEventListener("click", this.playPause);
-    document.getElementById('muteUnmute').addEventListener("click", this.muteUnmute);
-    document.getElementById('fullscreen').addEventListener("click", this.fullscreen);
-    document.getElementById('forward').addEventListener("click", this.forward);
-    document.getElementById('back').addEventListener("click", this.back);
+    document.getElementById('playPause').addEventListener("click", this.playPause.bind(this));
+    document.getElementById('muteUnmute').addEventListener("click", this.muteUnmute.bind(this));
+    document.getElementById('fullscreen').addEventListener("click", this.fullscreen.bind(this));
+    document.getElementById('forward').addEventListener("click", this.forward.bind(this));
+    document.getElementById('back').addEventListener("click", this.back.bind(this));
   }
 
   // TODO setja video sem class attibute
 
   playPause() {
-    const video = document.querySelector('video');
-    if (video.paused) {
-      video.play();
+    if (this.video.paused) {
+      this.video.play();
       document.getElementById('playPause').setAttribute('src','./img/pause.svg');
     } else {
-      video.pause();
+      this.video.pause();
       document.getElementById('playPause').setAttribute('src','./img/play.svg');
     }
   }
 
   muteUnmute() {
     const video = document.querySelector('video');
-    if (video.muted) {
-      video.muted = false;
+    if (this.video.muted) {
+      this.video.muted = false;
       document.getElementById('muteUnmute').setAttribute('src','./img/mute.svg');
     } else {
-      video.muted = true;
+      this.video.muted = true;
       document.getElementById('muteUnmute').setAttribute('src','./img/unmute.svg');
     }
   }
@@ -145,24 +131,21 @@ class Player {
   // tekid af netinu - endurskoda en samt ekki
   // http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos
   fullscreen() {
-    const video = document.querySelector('video');
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) {
-      video.mozRequestFullScreen(); // Firefox
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen(); // Chrome and Safari
+    if (this.video.requestFullscreen) {
+      this.video.requestFullscreen();
+    } else if (this.video.mozRequestFullScreen) {
+      this.video.mozRequestFullScreen(); // Firefox
+    } else if (this.video.webkitRequestFullscreen) {
+      this.video.webkitRequestFullscreen(); // Chrome and Safari
     }
   }
 
   forward() {
-    const video = document.querySelector('video');
-    video.currentTime += 15;
+    this.video.currentTime += 3;
   }
 
   back() {
-    const video = document.querySelector('video');
-    video.currentTime -= 15;
+    this.video.currentTime -= 3;
   }
 
 }

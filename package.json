@@ -7,6 +7,7 @@
     "eslint": "eslint script.js",
     "stylelint": "stylelint *.scss scss/*.scss --syntax scss",
     "lint": "npm-run-all --parallel eslint stylelint",
+    "babel": "babel script.js --watch --out-file script-compiled.js --source-maps",
     "babel": "babel player.js --watch --out-file player-compiled.js --source-maps",
     "browser-sync": "browser-sync start --server --files index.html styles.css script-compiled.js",
     "sass": "node-sass --source-map-embed --watch styles.scss styles.css",
