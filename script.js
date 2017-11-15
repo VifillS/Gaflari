@@ -25,41 +25,43 @@ class Video {
   }
 
   /**
-   * Tekur við title sem streng og date sem Date hlut
-   * Vistar sem json gögn í localStorage undir this.keyName
-   */
-  save(title, date) {
-    const data = { title, date };
-    const json = JSON.stringify(data);
-
-    window.localStorage.setItem(this.keyName, json);
-  }
-
-  /**
-   * Handler fyrir submit á formi.
-   * Sækir gögn úr formi og kallar í this.parseDate()
-   * Vistar gögn með this.save() og sýnir niðurteljara með this.create()
-   */
-  submit(e) {
-    e.preventDefault();
-
-    const title = this.form.querySelector('input[type=text]');
-    const dags = this.form.querySelector('input[type=date]');
-    const time = this.form.querySelector('input[type=time]');
-    const date = this.parseDate(dags.value, time.value);
-
-    this.save(title.value, date);
-
-    this.load();
-  }
-
-  /**
    * Tekur við:
    *  - date sem tölu í millisek
    * Skilar streng sem lýsir hversu gamall hluturinn er
    */
-  parseDate(date, time) {
-    return new Date(`${date}T${time}:00`);
+  parseDate(date) {
+    console.log(new Date(date));
+    console.log(new Date());
+    const seconds = Math.floor((new Date() - date) / 1000);
+    console.log('seconds', seconds);
+    console.log((60 * 60 * 24 * 7));
+    const weeks = Math.floor(seconds / (60 * 60 * 24 * 7));
+    console.log(weeks);
+    if (weeks > 1) {
+      return ('Fyrir ').concat(weeks.toString().concat(' vikum síðan'));
+    }
+    // if (weeks === 1) {
+    //   return ('Fyrir ').concat(weeks.toString().concat(' viku síðan'));
+    // }
+    const days = Math.floor(seconds / (60 * 60 * 24));
+    if (days > 1) {
+      return ('Fyrir ').concat(days.toString().concat(' dögum síðan'));
+    }
+    if (days === 1) {
+      return ('Fyrir ').concat(days.toString().concat(' degi síðan'));
+    }
+    const hours = Math.floor(seconds / (60 * 60));
+    if (hours > 1) {
+      return ('Fyrir ').concat(hours.toString().concat(' klukkustundum síðan'));
+    }
+    if (hours === 1) {
+      return ('Fyrir ').concat(hours.toString().concat(' klukkustund síðan'));
+    }
+    const minutes = Math.floor(seconds / 60);
+    if (minutes >= 1) {
+      return minutes.toString().concat(' mínutur');
+    }
+    return Math.floor(seconds).toString().concat(' sekúndur');
   }
 
   /**
@@ -67,10 +69,11 @@ class Video {
    */
   createCategory(data) {
     const category = data.categories;
-
     Object.keys(category).forEach(key =>
       this.container.appendChild(this.addElements(this.data, category[key])));
   }
+
+  // TODO -- útfæra þannig að lengd myndbandsins sjáist
 
   /**
    * Býr til element sem heldur utan um thumbnail:
@@ -87,7 +90,6 @@ class Video {
    */
   addElements(data, category) {
     const id = category.videos;
-
     const el = document.createElement('div');
     el.classList.add('videolist__container');
 
@@ -154,56 +156,6 @@ class Video {
 
     while (this.container.firstChild) {
       this.container.removeChild(this.container.firstChild);
-    }
-  }
-
-  /**
-   * Tekur við remaining sem eru millisekúndur í dagsetningu sem talið er
-   * niður í.
-   * Útbýr og skilar element sem inniheldur element fyrir daga, klukkustundir,
-   * mínútur og sekúndur þar til remaining gerist. Hver „partur“ er búinn til
-   * með kalli í this.createElement
-   */
-  countdown(remaining) {
-    const totalSecs = remaining / 1000;
-
-    const days = Math.floor(totalSecs / (60 * 60 * 24));
-    const hours = Math.floor(totalSecs / (60 * 60)) % 24;
-    const mins = Math.floor((totalSecs / 60) % 60);
-    const secs = Math.floor(totalSecs % 60);
-
-    const container = document.createElement('div');
-    container.classList.add('countdown__container');
-
-    container.appendChild(this.createElement(days, 'Dagar'));
-    container.appendChild(this.createElement(hours, 'Klst'));
-    container.appendChild(this.createElement(mins, 'Min'));
-    container.appendChild(this.createElement(secs, 'Sek'));
-
-    return container;
-  }
-
-  /**
-   * Telur niður.
-   * Fjarlægir allt úr this.element (ef eitthvað er þar) og athugar síðan hvort
-   * this.date (dagsetning sem talið er niður að) sé liðin og ef svo er birtir
-   * textann "Komið!" og stoppa teljara með this.stopCounter()
-   * Ef ekki liðið uppfærir teljara með því að bæta element úr this.countdown()
-   * við this.element
-   */
-  count() {
-    if (this.element.firstChild) {
-      this.element.removeChild(this.element.firstChild);
-    }
-
-    const diff = this.date - new Date();
-
-    if (diff <= 0) {
-      this.element.appendChild(document.createTextNode('Komid!'));
-      this.stopCounter();
-    } else {
-      const countdown = this.countdown(diff);
-      this.element.appendChild(countdown);
     }
   }
 }

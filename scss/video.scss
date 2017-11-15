@@ -2,7 +2,7 @@
 
 .videolist {
   max-width: $max-width;
-  
+
   &__heading {
     margin: $gutter 0 0 $gutter;
     color: #fff;
@@ -46,13 +46,12 @@
 
     &__title {
       overflow: hidden;
-      font-size: 1.25*$fsize;
+      font-size: 1.5*$fsize;
       text-overflow: ellipsis;
       white-space: nowrap;
 
       @media (min-width: 1001px) {
         font-size: $fsize;
-      
       }
     }
 

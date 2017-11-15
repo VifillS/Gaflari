@@ -35,7 +35,7 @@
     {
       "id": 5,
       "title": "Gaflari í sundi",
-      "created": 1504904047011,
+      "created": 1510744844011,
       "duration": 212,
       "poster": "./videos/gaflari.png",
       "video": "./videos/rickrolled.mp4"
@@ -44,7 +44,7 @@
   "categories": [
     {
       "title": "Nýleg myndbönd",
-      "videos": [1, 2, 5]
+      "videos": [5, 1, 2]
     },
     {
       "title": "Kennslumyndbönd",
