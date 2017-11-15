@@ -7,9 +7,6 @@ class Video {
     this.container = document.querySelector('.videolist');
     this.data = null;
     console.log('container fundinn', this.container);
-    // til þess að submit hafi þennan klasa sem "this" verðum við
-    // að nota bind hér (og í öðrum föllum sem við bindum!)
-    // this.form.addEventListener('submit', this.submit.bind(this));
   }
 
   /**
@@ -17,16 +14,15 @@ class Video {
    * og thumbnails
    */
   load() {
-    console.log('rass');
     const request = new XMLHttpRequest();
-    request.open('GET', 'videos.json');
+    request.open('GET', '/videos.json');
     request.responseType = 'json';
     request.onload = () => {
       console.log(request);
       this.data = request.response;
       console.log(this.data.videos[0]);
       console.log(this.data.categories);
-      this.create(this.data);
+      this.createCategory(this.data);
     };
     request.send();
   }
@@ -74,17 +70,14 @@ class Video {
   }
 
   /**
-   * Býr til element fyrir niðurteljara og bætir við this.container
-   * Setur this.date sem dagsetningu sem talið er niður að
-   * Setur this.element sem element sem geymir niðurteljara
-   * Bætir við "eyða" takka sem sér um að eyða niðurteljara með this.delete
-   * Byrjar niðurteljara með this.startCounter() og
-   * felur form með this.hideForm()
+   * Býr til container fyrir flokk og kallar á fall sem setur 
+   * viðeigandi hluti inni í hann.
    */
-  create(data) {
+  createCategory(data) {
     const category = data.categories;
-    for (const key in category) {
-      console.log(key + '->' + category[key].title);
+    debugger;
+    for (key of category) {
+      console.log(key + '->' + category[key].videos);
     }
   }
 
