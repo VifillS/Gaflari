@@ -105,15 +105,19 @@ class Video {
     const title = document.createElement('h1');
     title.classList.add('videolist__heading');
     title.appendChild(document.createTextNode(category.title));
-    this.container.appendChild(title);
+    el.appendChild(title);
+
+    const videos = document.createElement('div');
+    videos.classList.add('videolist__videos');
     id.forEach(key =>
-      el.appendChild(this.createElement(
+      videos.appendChild(this.createElement(
         this.data.videos[key - 1].title,
         this.data.videos[key - 1].poster,
         this.data.videos[key - 1].created,
         key,
       )));
 
+    el.appendChild(videos);
     return el;
   }
 
