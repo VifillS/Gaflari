@@ -1,11 +1,16 @@
+@import "scss/variables";
+
 .videolist {
+  max-width: $max-width;
+  
   &__heading {
-    margin: 20px 0 0 20px;
+    margin: $gutter 0 0 $gutter;
     color: #fff;
   }
 
   &__container {
     display: flex;
+    max-width: $max-width;
     flex-direction: column;
   }
 
@@ -18,10 +23,13 @@
   &__box {
     display: flex;
     width: 100%;
-    margin: 20px;
+    padding: $gutter;
     flex-direction: column;
-    @media (min-width: 800px) {
-      width: 30%;
+    @media (min-width: 700px) {
+      width: 50%;
+    }
+    @media (min-width: 1001px) {
+      width: 33%;
     }
   }
 
@@ -38,9 +46,14 @@
 
     &__title {
       overflow: hidden;
-      font-size: 24px;
+      font-size: 1.25*$fsize;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      @media (min-width: 1001px) {
+        font-size: $fsize;
+      
+      }
     }
 
     &__added {

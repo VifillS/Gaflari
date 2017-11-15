@@ -13,6 +13,10 @@ html {
   line-height: 1.5;
 }
 
+h1 {
+  font-size: 2 * $fsize;
+}
+
 main {
   max-width: $max-width; // þar sem við erum að eiga við neikvæð margin á grid, setjum overflow-x
   margin: 0 auto;

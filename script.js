@@ -98,11 +98,12 @@ class Video {
 
     const videos = document.createElement('div');
     videos.classList.add('videolist__videos');
+
     id.forEach(key =>
       videos.appendChild(this.createElement(
-        this.data.videos[key - 1].title,
-        this.data.videos[key - 1].poster,
-        this.data.videos[key - 1].created,
+        this.data.videos.find(item => item.id === key).title,
+        this.data.videos.find(item => item.id === key).poster,
+        this.data.videos.find(item => item.id === key).created,
         key,
       )));
 
