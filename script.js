@@ -6,6 +6,7 @@ class Video {
   constructor() {
     this.container = document.querySelector('.videolist');
     this.data = null;
+    this.url = 'video.html?id=';
     console.log('container fundinn', this.container);
   }
 
@@ -61,58 +62,90 @@ class Video {
 
   /**
    * Tekur við:
-   *  - date sem streng á forminu "yyyy-mm-dd", t.d. "2017-11-06"
-   *  - time sem streng á forminu "hh:mm", t.d. "09:00"
-   * Skilar date hlut með gögnum úr date og time
+   *  - date sem tölu í millisek
+   * Skilar streng sem lýsir hversu gamall hluturinn er
    */
   parseDate(date, time) {
     return new Date(`${date}T${time}:00`);
   }
 
   /**
-   * Býr til container fyrir flokk og kallar á fall sem setur 
-   * viðeigandi hluti inni í hann.
+   * 
    */
   createCategory(data) {
     const category = data.categories;
-    debugger;
-    for (key of category) {
-      console.log(key + '->' + category[key].videos);
-    }
+    console.log(typeof category);
+    console.log(Object.entries(category));
+
+    Object.keys(category).forEach(key =>
+      this.container.appendChild(this.addElements(this.data, category[key])));
   }
 
   /**
    * Býr til element sem heldur utan um thumbnail:
    * <div class="videolist__box">
    *   <a href=...>
-   *     <img src=url>
-   *   </a>
+   *     <img class= "videolist__img" src=url>
    *   <div class="videolist__description">
-   *     <span class="videolist__description__title">title</span>
-   *     <span class="videolist__description__added">added</span>
+   *     <h2 class="videolist__description__title">title</h2>
+   *     <p class="videolist__description__added">added</p>
    *   </div>
+   *   </a>
    * </div>
    * og skilar element
    */
   addElements(data, category) {
-
-  }
-
-  createElement(url, title, date) {
+    const id = category.videos;
+    // const id = [5, 1, 2];
+    console.log(category);
+    console.log(id);
     const el = document.createElement('div');
-    el.classList.add('countdown__box');
+    el.classList.add('videolist__container');
 
-    const numEl = document.createElement('span');
-    numEl.classList.add('countdown__num');
-    numEl.appendChild(document.createTextNode(date));
-    el.appendChild(numEl);
-
-    const titleEl = document.createElement('span');
-    titleEl.classList.add('countdown__title');
-    titleEl.appendChild(document.createTextNode(title));
-    el.appendChild(titleEl);
+    const title = document.createElement('h1');
+    title.classList.add('videolist__heading');
+    title.appendChild(document.createTextNode(category.title));
+    this.container.appendChild(title);
+    id.forEach(key =>
+      el.appendChild(this.createElement(
+        this.data.videos[key - 1].title,
+        this.data.videos[key - 1].poster,
+        this.data.videos[key - 1].created,
+        key,
+      )));
 
     return el;
+  }
+
+  createElement(title, image, date, id) {
+    const el = document.createElement('a');
+    console.log(this.url + id);
+
+    el.href = this.url + id;
+
+    const mynd = document.createElement('img');
+    mynd.classList.add('videolist__img');
+    mynd.setAttribute('src', image);
+    el.appendChild(mynd);
+
+    const description = document.createElement('div');
+    description.classList.add('videolist__description');
+
+    const titleEl = document.createElement('h2');
+    titleEl.classList.add('videolist__description__title');
+    titleEl.appendChild(document.createTextNode(title));
+    description.appendChild(titleEl);
+    const dateEl = document.createElement('span');
+    dateEl.classList.add('videolist__description__added');
+    dateEl.appendChild(document.createTextNode(this.parseDate(date)));
+    description.appendChild(dateEl);
+
+    el.appendChild(description);
+    const box = document.createElement('div');
+    box.classList.add('videolist__box');
+    box.appendChild(el);
+
+    return box;
   }
 
   /**

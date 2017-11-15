@@ -3,20 +3,38 @@
 
   &__container {
     display: flex;
+    flex-wrap: wrap;    
   }
 
   &__box {
     display: flex;
+    max-width: 450px;
+    min-width: 300px;
+    margin: 20px;
     flex-direction: column;
   }
 
   &__img {
-
+    width: 100%;
   }
 
   &__description {
     display: flex;
-    &__title {}
-    &__added {}
+    overflow: hidden;
+    color: #fff;
+    flex-direction: column;
+
+    &__title {
+      overflow: hidden;
+      font-size: 24px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__added {
+      font-size: 16px;
+      text-decoration: none;
+    }
   }
+
 }
