@@ -7,7 +7,6 @@ class Video {
     this.container = document.querySelector('.videolist');
     this.data = null;
     this.url = 'video.html?id=';
-    console.log('container fundinn', this.container);
   }
 
   /**
@@ -19,10 +18,7 @@ class Video {
     request.open('GET', '/videos.json');
     request.responseType = 'json';
     request.onload = () => {
-      console.log(request);
       this.data = request.response;
-      console.log(this.data.videos[0]);
-      console.log(this.data.categories);
       this.createCategory(this.data);
     };
     request.send();
@@ -52,9 +48,6 @@ class Video {
     const time = this.form.querySelector('input[type=time]');
     const date = this.parseDate(dags.value, time.value);
 
-    console.log('titill er', title.value);
-    console.log('date er', date.toString());
-
     this.save(title.value, date);
 
     this.load();
@@ -70,12 +63,10 @@ class Video {
   }
 
   /**
-   * 
+   * Býr til container sem heldur utan um flokka
    */
   createCategory(data) {
     const category = data.categories;
-    console.log(typeof category);
-    console.log(Object.entries(category));
 
     Object.keys(category).forEach(key =>
       this.container.appendChild(this.addElements(this.data, category[key])));
@@ -96,9 +87,7 @@ class Video {
    */
   addElements(data, category) {
     const id = category.videos;
-    // const id = [5, 1, 2];
-    console.log(category);
-    console.log(id);
+
     const el = document.createElement('div');
     el.classList.add('videolist__container');
 
@@ -123,7 +112,6 @@ class Video {
 
   createElement(title, image, date, id) {
     const el = document.createElement('a');
-    console.log(this.url + id);
 
     el.href = this.url + id;
 
