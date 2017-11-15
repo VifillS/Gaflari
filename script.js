@@ -103,8 +103,10 @@ class Video {
         this.data.videos.find(item => item.id === key).created,
         key,
       )));
-
+    const separator = document.createElement('div');
+    separator.classList.add('videolist__separator');
     el.appendChild(videos);
+    el.appendChild(separator);
     return el;
   }
 
