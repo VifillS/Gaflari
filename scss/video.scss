@@ -2,6 +2,7 @@
 
 .videolist {
   max-width: $max-width;
+  margin-bottom: $gutter;
 
   &__heading {
     margin: $gutter 0 0 $gutter;
