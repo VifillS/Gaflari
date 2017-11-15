@@ -57,7 +57,7 @@ const videos = `{
   ]
 }`;
 
-
+// TODO: taka ut controls
 class Player {
   /**
    * Finnur container fyrir myndbönd og form.
@@ -143,6 +143,7 @@ class Player {
   }
 
   // tekid af netinu - endurskoda en samt ekki
+  // http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos
   fullscreen() {
     const video = document.querySelector('video');
     if (video.requestFullscreen) {
