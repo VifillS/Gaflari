@@ -82,20 +82,7 @@ class Video {
   // TODO -- útfæra þannig að lengd myndbandsins sjáist
 
   /**
-   * Býr til element sem heldur utan um thumbnail:
-   * <div class="videolist__box">
-   *   <a href=...>
-   *   <div class="videolist__thumbnail">
-   *     <img class= "videolist__img" src=url>
-   *     <span>video length</span>
-   *   <thumbnail>
-   *   <div class="videolist__description">
-   *     <h2 class="videolist__description__title">title</h2>
-   *     <p class="videolist__description__added">added</p>
-   *   </div>
-   *   </a>
-   * </div>
-   * og skilar element
+   * Býr til container sem heldur utan um myndbönd í flokki
    */
   addElements(data, category) {
     const id = category.videos;
@@ -124,7 +111,25 @@ class Video {
     el.appendChild(separator);
     return el;
   }
-
+  /**
+   * Býr til container sem inniheldur:
+   *   - Poster fyrir myndband
+   *   - lengdina á myndbandinu
+   *   - titil myndbandsins
+   *   - hversu langt er síðan það var sett inn
+   * <div class="videolist__box">
+   *   <a href=url class="videolist__tag">
+   *   <div class="videolist__thumbnail">
+   *     <img class= "videolist__thumbnail__img" src=image>
+   *     <span class="videolist__thumbnail__duration">duration</span>
+   *   <thumbnail>
+   *   <div class="videolist__description">
+   *     <h2 class="videolist__description__title">title</h2>
+   *     <p class="videolist__description__added">added</p>
+   *   </div>
+   *   </a>
+   * </div>
+   */
   createElement(title, image, date, duration, id) {
     const el = document.createElement('a');
     el.classList.add('videolist__tag');
@@ -162,22 +167,6 @@ class Video {
     box.appendChild(el);
 
     return box;
-  }
-
-  /**
-   * Eyðir niðurteljara með því að fjarlægja úr localStorage og
-   * fjarlægja allt úr this.container.
-   * Kallar líka í this.stopCounter() og this.showForm()
-   */
-  delete() {
-    window.localStorage.removeItem(this.keyName);
-
-    this.stopCounter();
-    this.showForm();
-
-    while (this.container.firstChild) {
-      this.container.removeChild(this.container.firstChild);
-    }
   }
 }
 

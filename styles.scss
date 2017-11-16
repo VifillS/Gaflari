@@ -1,29 +1,29 @@
-@import 'scss/variables';
+@import "scss/variables";
 
-*, *:before, *:after {
+*, *::before, *:after {/* stylelint-disable-line */
   box-sizing: inherit;
   padding: 0;
   margin: 0;
 }
 
-html {
+html {/* stylelint-disable-line */
   box-sizing: border-box;
   font-family: helvetica, arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
 
-h1 {
+h1 {/* stylelint-disable-line */
   font-size: 2 * $fsize;
 }
 
-main {
+main {/* stylelint-disable-line */
   max-width: $max-width; // þar sem við erum að eiga við neikvæð margin á grid, setjum overflow-x
   margin: 0 auto;
   // hér sem hidden, þá fáum við ekki lárétta skrunstiku
   overflow-x: hidden;
 }
 
-@import 'scss/video';
-@import 'scss/grid';
-@import 'scss/player';
+@import "scss/video";
+@import "scss/grid";
+@import "scss/player";
