@@ -1,12 +1,11 @@
 class Video {
   /**
    * Finnur container fyrir myndbönd.
-   * Bindur submit eventhandler við form.
    */
   constructor() {
     this.container = document.querySelector('.videolist');
     this.data = null;
-    this.url = 'video.html?id=';
+    this.url = window.location.href.concat('video.html?id=');
   }
 
   /**
