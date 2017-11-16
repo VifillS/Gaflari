@@ -39,6 +39,14 @@
       "duration": 212,
       "poster": "./videos/gaflari.png",
       "video": "./videos/rickrolled.mp4"
+    },
+    {
+      "id": 6,
+      "title": "Óli á hjóli",
+      "created": 1405044844011,
+      "duration": 212,
+      "poster": "./videos/16-9.png",
+      "video": "./videos/rickrolled.mp4"
     }
   ],
   "categories": [
@@ -52,7 +60,7 @@
     },
     {
       "title": "Skemmtimyndbönd",
-      "videos": [2, 3, 4]
+      "videos": [2, 3, 4, 6]
     }
   ]
 }
