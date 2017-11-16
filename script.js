@@ -59,6 +59,17 @@ class Video {
     return Math.floor(seconds).toString().concat(' sekúndur');
   }
 
+  parseDuration(duration) {
+    const mins = Math.floor((duration / 60));
+    const secs = Math.floor(duration % 60);
+    const m = mins.toString().concat(':');
+
+    if (secs < 10) {
+      return m.concat('0'.concat(secs.toString()));
+    }
+    return m.concat(secs.toString());
+  }
+
   /**
    * Býr til container sem heldur utan um flokka
    */
@@ -74,7 +85,10 @@ class Video {
    * Býr til element sem heldur utan um thumbnail:
    * <div class="videolist__box">
    *   <a href=...>
+   *   <div class="videolist__thumbnail">
    *     <img class= "videolist__img" src=url>
+   *     <span>video length</span>
+   *   <thumbnail>
    *   <div class="videolist__description">
    *     <h2 class="videolist__description__title">title</h2>
    *     <p class="videolist__description__added">added</p>
@@ -101,6 +115,7 @@ class Video {
         this.data.videos.find(item => item.id === key).title,
         this.data.videos.find(item => item.id === key).poster,
         this.data.videos.find(item => item.id === key).created,
+        this.data.videos.find(item => item.id === key).duration,
         key,
       )));
     const separator = document.createElement('div');
@@ -110,15 +125,24 @@ class Video {
     return el;
   }
 
-  createElement(title, image, date, id) {
+  createElement(title, image, date, duration, id) {
     const el = document.createElement('a');
-
+    el.classList.add('videolist__tag');
     el.href = this.url + id;
+    const thumbnail = document.createElement('div');
+    thumbnail.classList.add('videolist__thumbnail');
 
     const mynd = document.createElement('img');
-    mynd.classList.add('videolist__img');
+    mynd.classList.add('videolist__thumbnail__img');
     mynd.setAttribute('src', image);
-    el.appendChild(mynd);
+    thumbnail.appendChild(mynd);
+
+    const time = document.createElement('span');
+    time.classList.add('videolist__thumbnail__duration');
+    time.innerHTML = this.parseDuration(duration);
+    thumbnail.appendChild(time);
+
+    el.appendChild(thumbnail);
 
     const description = document.createElement('div');
     description.classList.add('videolist__description');

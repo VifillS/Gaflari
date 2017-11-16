@@ -34,8 +34,22 @@
     }
   }
 
-  &__img {
-    width: 100%;
+  &__thumbnail {
+    position: relative;
+
+    &__img {
+      width: 100%;
+    }
+
+    &__duration {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 0 5px;
+      margin: $gutter/2 $gutter/4;
+      color: #fff;
+      background-color: rgba(40, 40, 40, 0.8);
+    }
   }
 
   &__separator {
@@ -65,6 +79,10 @@
       font-size: 16px;
       text-decoration: none;
     }
+  }
+
+  &__tag {
+    text-decoration: none;
   }
 
 }
