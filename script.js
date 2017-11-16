@@ -30,28 +30,42 @@ class Video {
    */
   parseDate(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
+    const years = Math.floor(seconds / (60 * 60 * 24 * 365));
+    const months = Math.floor(seconds / (60 * 60 * 24 * 30));
     const weeks = Math.floor(seconds / (60 * 60 * 24 * 7));
+    const days = Math.floor(seconds / (60 * 60 * 24));
+    const hours = Math.floor(seconds / (60 * 60));
+    const minutes = Math.floor(seconds / 60);
+    if (years > 1) {
+      return ('Fyrir ').concat(years.toString().concat(' árum síðan'));
+    }
+    if (years === 1) {
+      return ('Fyrir ').concat(years.toString().concat(' ári síðan'));
+    }
+    if (months > 1) {
+      return ('Fyrir ').concat(months.toString().concat(' mánuðum síðan'));
+    }
+    if (months === 1) {
+      return ('Fyrir ').concat(months.toString().concat(' mánuði síðan'));
+    }
     if (weeks > 1) {
       return ('Fyrir ').concat(weeks.toString().concat(' vikum síðan'));
     }
-    // if (weeks === 1) {
-    //   return ('Fyrir ').concat(weeks.toString().concat(' viku síðan'));
-    // }
-    const days = Math.floor(seconds / (60 * 60 * 24));
+    if (weeks === 1) {
+      return ('Fyrir ').concat(weeks.toString().concat(' viku síðan'));
+    }
     if (days > 1) {
       return ('Fyrir ').concat(days.toString().concat(' dögum síðan'));
     }
     if (days === 1) {
       return ('Fyrir ').concat(days.toString().concat(' degi síðan'));
     }
-    const hours = Math.floor(seconds / (60 * 60));
     if (hours > 1) {
       return ('Fyrir ').concat(hours.toString().concat(' klukkustundum síðan'));
     }
     if (hours === 1) {
       return ('Fyrir ').concat(hours.toString().concat(' klukkustund síðan'));
     }
-    const minutes = Math.floor(seconds / 60);
     if (minutes >= 1) {
       return minutes.toString().concat(' mínutur');
     }
