@@ -72,15 +72,34 @@ class Video {
     return Math.floor(seconds).toString().concat(' sekúndur');
   }
 
-  parseDuration(duration) {
-    const mins = Math.floor((duration / 60));
-    const secs = Math.floor(duration % 60);
-    const m = mins.toString().concat(':');
+  /**
+   * Hjálparfall fyrir parseDuration sem fær inn heiltölu n
+   * og skilar henni aftur ef hún er stærri en 10 annars
+   * bætist 0 framan á hana.
+   */
+  minTwoDigits(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
 
-    if (secs < 10) {
-      return m.concat('0'.concat(secs.toString()));
+  /**
+   * Tekur við:
+   *  - sekúndum
+   * Skilar streng sem inniheldur lengdina
+   * (HH:mm:ss) eða (mm:ss) eða (m:ss)
+   */
+  parseDuration(duration) {
+    const hours = Math.floor(duration / (60 * 60));
+    const mins = Math.floor((duration / 60) % 60);
+    const secs = Math.floor(duration % 60);
+
+    const m = this.minTwoDigits(mins);
+    const s = this.minTwoDigits(secs);
+    const t = m.concat(':', s);
+
+    if (hours > 0) {
+      return hours.toString().concat(':', t);
     }
-    return m.concat(secs.toString());
+    return mins.toString().concat(':', s);
   }
 
   /**
