@@ -24,6 +24,7 @@
   &__box {
     display: flex;
     width: 100%;
+    min-width: 400px;
     padding: $gutter;
     flex-direction: column;
     @media (min-width: 700px) {
@@ -48,7 +49,7 @@
       padding: 0 5px;
       margin: $gutter/2 $gutter/4;
       color: #fff;
-      background-color: rgba(40, 40, 40, 0.8);
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
 
@@ -77,6 +78,7 @@
     }
 
     &__added {
+      // font-size: 0.75*$fsize;
       text-decoration: none;
     }
   }
@@ -85,4 +87,17 @@
     text-decoration: none;
   }
 
+  &__error {
+    position: relative;
+    height: 600px;
+    text-align: center;
+
+    &__text {
+      position: absolute;
+      top: 50%;  
+      right: 30%;
+      left: 30%;
+      color: #fff;
+    }
+  }
 }
