@@ -99,6 +99,7 @@ class Player {
 
     // setja eventlistenera
     document.getElementById('playPause').addEventListener("click", this.playPause.bind(this));
+    this.container.addEventListener("click", this.playPause.bind(this));
     document.getElementById('muteUnmute').addEventListener("click", this.muteUnmute.bind(this));
     document.getElementById('fullscreen').addEventListener("click", this.fullscreen.bind(this));
     document.getElementById('forward').addEventListener("click", this.forward.bind(this));
@@ -111,14 +112,15 @@ class Player {
     if (this.video.paused) {
       this.video.play();
       document.getElementById('playPause').setAttribute('src','./img/pause.svg');
+      this.container.classList.remove('pause')
     } else {
       this.video.pause();
       document.getElementById('playPause').setAttribute('src','./img/play.svg');
+      this.container.classList.add('pause')
     }
   }
 
   muteUnmute() {
-    const video = document.querySelector('video');
     if (this.video.muted) {
       this.video.muted = false;
       document.getElementById('muteUnmute').setAttribute('src','./img/mute.svg');

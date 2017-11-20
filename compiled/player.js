@@ -125,5 +125,4 @@ document.addEventListener('DOMContentLoaded', function () {
   var player = new Player();
   player.load();
 });
-
-//# sourceMappingURL=player-compiled.js.map
+//# sourceMappingURL=player.js.map
