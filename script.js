@@ -18,11 +18,28 @@ class Video {
     request.responseType = 'json';
     request.onload = () => {
       this.data = request.response;
-      this.createCategory(this.data);
+      if (this.data !== null) {
+        this.createCategory(this.data);
+      } else {
+        this.showError('Gat ekki hlaðið gögnum');
+      }
+    };
+    request.onerror = () => {
+      this.showError('Gat ekki hlaðið gögnum');
+      console.log(this.container);
     };
     request.send();
   }
 
+  showError(value) {
+    const divEl = document.createElement('div');
+    divEl.classList.add('videolist__error');
+    const el = document.createElement('h2');
+    el.classList.add('videolist__error__text');
+    el.appendChild(document.createTextNode(value));
+    divEl.appendChild(el);
+    this.container.appendChild(divEl);
+  }
   /**
    * Tekur við:
    *  - date sem tölu í millisek
