@@ -12,7 +12,7 @@ video {
 
 .video {
   margin: 0 auto;
-  max-width: 950px;
+  max-width: 920px;
   position: relative;
   cursor: pointer;
 
@@ -36,6 +36,11 @@ video {
 
 .title {
   color: #fff;
+  max-width: 50%;
+  overflow-wrap: break-word;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 1 * $gutter;
   margin-bottom: 1 * $gutter;
   text-align: center;
@@ -48,16 +53,16 @@ video {
   margin: $gutter/2 auto;
 
   .button {
-    max-height: 3*$gutter;
     max-width: 3*$gutter;
+    max-height: 3*$gutter;
     margin: $gutter/2;
     cursor: pointer;
 
-    &_hidden {
-      display: none;
-    }
+    @media only screen and (max-device-width: 500px) {
+      max-width: 6*$gutter;
+      max-height: 6*$gutter;
+    }  
   }
-
 }
 
 .footer {
