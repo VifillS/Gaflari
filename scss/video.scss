@@ -27,10 +27,10 @@
     min-width: 400px;
     padding: $gutter;
     flex-direction: column;
-    @media (min-width: 700px) {
+    @media (min-width: 800px) {
       width: 50%;
     }
-    @media (min-width: 1001px) {
+    @media (min-width: 1200px) {
       width: 33%;
     }
   }
@@ -72,7 +72,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      @media (min-width: 1001px) {
+      @media (min-width: 1000px) {
         font-size: $fsize;
       }
     }
