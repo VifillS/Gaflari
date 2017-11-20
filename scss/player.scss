@@ -5,9 +5,33 @@ body {
 }
 
 video {
-  margin: 0 auto;
-  max-width: 920px;
+  width: 100%;
+  height: 100%;
   display: block;
+}
+
+.video {
+  margin: 0 auto;
+  max-width: 950px;
+  position: relative;
+  cursor: pointer;
+
+  &:before {
+    content: none;
+  }
+
+  &.pause:before {
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    background-color: rgba(0,0,0,0.3);
+    background-image: url('./img/play.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 6% auto;
+  }
+
 }
 
 .title {
@@ -24,8 +48,8 @@ video {
   margin: $gutter/2 auto;
 
   .button {
-    max-height: 5*$gutter;
-    max-width: 5*$gutter;
+    max-height: 3*$gutter;
+    max-width: 3*$gutter;
     margin: $gutter/2;
     cursor: pointer;
 
@@ -45,7 +69,7 @@ video {
     text-decoration: none;
     cursor: pointer;
     color: #fff;
-    font-size: 1.5 * $fsize;
+    font-size: 1.3 * $fsize;
   }
 }
 
