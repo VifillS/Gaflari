@@ -18,8 +18,7 @@ h1 {/* stylelint-disable-line */
 }
 
 main {/* stylelint-disable-line */
-  min-width: $max-width/3;
-  max-width: $max-width; // þar sem við erum að eiga við neikvæð margin á grid, setjum overflow-x
+  max-width: $max-width;
   margin: 0 auto;
   // hér sem hidden, þá fáum við ekki lárétta skrunstiku
   overflow-x: hidden;
