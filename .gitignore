@@ -8,6 +8,7 @@ styles.css
 *.swp
 *.txt
 /.idea
+/compiled
 settings.json
 script-compiled.js
 script-compiled.js.map
