@@ -32,11 +32,29 @@ var Video = function () {
       request.responseType = 'json';
       request.onload = function () {
         _this.data = request.response;
-        _this.createCategory(_this.data);
+        if (_this.data !== null) {
+          _this.createCategory(_this.data);
+        } else {
+          _this.showError('Gat ekki hlaðið gögnum');
+        }
+      };
+      request.onerror = function () {
+        _this.showError('Gat ekki hlaðið gögnum');
+        console.log(_this.container);
       };
       request.send();
     }
-
+  }, {
+    key: 'showError',
+    value: function showError(value) {
+      var divEl = document.createElement('div');
+      divEl.classList.add('videolist__error');
+      var el = document.createElement('h2');
+      el.classList.add('videolist__error__text');
+      el.appendChild(document.createTextNode(value));
+      divEl.appendChild(el);
+      this.container.appendChild(divEl);
+    }
     /**
      * Tekur við:
      *  - date sem tölu í millisek
