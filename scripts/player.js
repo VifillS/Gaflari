@@ -40,18 +40,30 @@ class Player {
   }
 
   populate(data) {
-    const video = data.videos[this.id - 1];
-
     const headEl = document.createElement('h1');
-    headEl.appendChild(document.createTextNode(video.title));
+    const vidEl = document.createElement('video');
+
+    if (data.videos[this.id - 1]) {
+      const video = data.videos[this.id - 1];
+
+      headEl.appendChild(document.createTextNode(video.title));
+
+      vidEl.setAttribute('src', video.video);
+      vidEl.setAttribute('poster', video.poster);
+    } else {
+      headEl.appendChild(document.createTextNode('Myndband fannst ekki! :('));
+
+      vidEl.setAttribute('src', './videos/rickrolled.mp4');
+    }
+
     headEl.setAttribute('class', 'title');
     document.querySelector('main').prepend(headEl);
-
-    const vidEl = document.createElement('video');
-    vidEl.setAttribute('src', video.video);
-    vidEl.setAttribute('poster', video.poster);
     this.video = vidEl;
     this.container.appendChild(vidEl);
+
+    if (!data.videos[this.id - 1]) {
+      this.playPause();
+    }
   }
 
   // TODO setja video sem class attibute

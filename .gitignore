@@ -3,7 +3,7 @@
 .stylelintrc
 .babelrc
 .eslintrc.js
-styles.css
+*.css
 .DS_Store
 *.swp
 *.txt
