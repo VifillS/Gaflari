@@ -43,7 +43,7 @@ class Player {
     const headEl = document.createElement('h1');
     const vidEl = document.createElement('video');
 
-    if (data.videos[this.id -1]) {
+    if (data.videos[this.id - 1]) {
       const video = data.videos[this.id - 1];
 
       headEl.appendChild(document.createTextNode(video.title));
@@ -61,7 +61,7 @@ class Player {
     this.video = vidEl;
     this.container.appendChild(vidEl);
 
-    if (!data.videos[this.id-1]) {
+    if (!data.videos[this.id - 1]) {
       this.playPause();
     }
   }
