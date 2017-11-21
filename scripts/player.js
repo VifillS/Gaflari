@@ -1,68 +1,7 @@
-const videos = `{
-  "videos": [
-    {
-      "id": 1,
-      "title": "Lego!",
-      "created": 1509804047011,
-      "duration": 5,
-      "poster": "./videos/small.png",
-      "video": "./videos/small.mp4"
-    },
-    {
-      "id": 2,
-      "title": "Big Bunny",
-      "created": 1507804047011,
-      "duration": 62,
-      "poster": "./videos/bunny.png",
-      "video": "./videos/bunny.mp4"
-    },
-    {
-      "id": 3,
-      "title": "Prufu myndband",
-      "created": 1505904047011,
-      "duration": 3600,
-      "poster": "./videos/16-9.png",
-      "video": "./videos/bunny.mp4"
-    },
-    {
-      "id": 4,
-      "title": "Prufu myndband með löngum texta sem fer í tvær línur",
-      "created": 1504904047011,
-      "duration": 220,
-      "poster": "./videos/16-9.png",
-      "video": "./videos/bunny.mp4"
-    },
-    {
-      "id": 5,
-      "title": "Gaflari í sundi",
-      "created": 1504904047011,
-      "duration": 212,
-      "poster": "./videos/gaflari.png",
-      "video": "./videos/rickrolled.mp4"
-    }
-  ],
-  "categories": [
-    {
-      "title": "Nýleg myndbönd",
-      "videos": [1, 2, 5]
-    },
-    {
-      "title": "Kennslumyndbönd",
-      "videos": [1, 3, 4]
-    },
-    {
-      "title": "Skemmtimyndbönd",
-      "videos": [2, 3, 4]
-    }
-  ]
-}`;
-
 class Player {
-
   constructor() {
     this.id = this.getQueryVariable('id');
     this.container = document.querySelector('.video');
-    this.videos = JSON.parse(videos).videos;
     this.video;
   }
 
@@ -83,27 +22,36 @@ class Player {
    * og thumbnails
    */
   load() {
-    const video = this.videos[this.id - 1];
+    const request = new XMLHttpRequest();
+    request.open('GET', '/videos.json');
+    request.responseType = 'json';
+    request.send();
+    request.onload = () => {
+      this.populate(request.response);
+    };
+
+    // setja eventlistenera
+    document.getElementById('playPause').addEventListener('click', this.playPause.bind(this));
+    this.container.addEventListener('click', this.playPause.bind(this));
+    document.getElementById('muteUnmute').addEventListener('click', this.muteUnmute.bind(this));
+    document.getElementById('fullscreen').addEventListener('click', this.fullscreen.bind(this));
+    document.getElementById('forward').addEventListener('click', this.forward.bind(this));
+    document.getElementById('back').addEventListener('click', this.back.bind(this));
+  }
+
+  populate(data) {
+    const video = data.videos[this.id - 1];
 
     const headEl = document.createElement('h1');
     headEl.appendChild(document.createTextNode(video.title));
-    headEl.setAttribute('class','title');
+    headEl.setAttribute('class', 'title');
     document.querySelector('main').prepend(headEl);
 
     const vidEl = document.createElement('video');
     vidEl.setAttribute('src', video.video);
     vidEl.setAttribute('poster', video.poster);
-    //vidEl.setAttribute('controls', 'True');
     this.video = vidEl;
     this.container.appendChild(vidEl);
-
-    // setja eventlistenera
-    document.getElementById('playPause').addEventListener("click", this.playPause.bind(this));
-    this.container.addEventListener("click", this.playPause.bind(this));
-    document.getElementById('muteUnmute').addEventListener("click", this.muteUnmute.bind(this));
-    document.getElementById('fullscreen').addEventListener("click", this.fullscreen.bind(this));
-    document.getElementById('forward').addEventListener("click", this.forward.bind(this));
-    document.getElementById('back').addEventListener("click", this.back.bind(this));
   }
 
   // TODO setja video sem class attibute
@@ -111,22 +59,22 @@ class Player {
   playPause() {
     if (this.video.paused) {
       this.video.play();
-      document.getElementById('playPause').setAttribute('src','./img/pause.svg');
-      this.container.classList.remove('pause')
+      document.getElementById('playPause').setAttribute('src', './img/pause.svg');
+      this.container.classList.remove('pause');
     } else {
       this.video.pause();
-      document.getElementById('playPause').setAttribute('src','./img/play.svg');
-      this.container.classList.add('pause')
+      document.getElementById('playPause').setAttribute('src', './img/play.svg');
+      this.container.classList.add('pause');
     }
   }
 
   muteUnmute() {
     if (this.video.muted) {
       this.video.muted = false;
-      document.getElementById('muteUnmute').setAttribute('src','./img/mute.svg');
+      document.getElementById('muteUnmute').setAttribute('src', './img/mute.svg');
     } else {
       this.video.muted = true;
-      document.getElementById('muteUnmute').setAttribute('src','./img/unmute.svg');
+      document.getElementById('muteUnmute').setAttribute('src', './img/unmute.svg');
     }
   }
 
@@ -149,7 +97,6 @@ class Player {
   back() {
     this.video.currentTime -= 3;
   }
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
