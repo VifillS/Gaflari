@@ -3,6 +3,7 @@
 
 .video {
   position: relative;
+  width: 94%;
   max-width: 920px;
   margin: 0 auto;
   cursor: pointer;
@@ -22,7 +23,6 @@
     background-position: center;
     background-size: 6% auto;
   }
-
 }
 
 .title {
@@ -46,12 +46,15 @@
   .button {
     max-width: 3 * $gutter;
     max-height: 3 * $gutter;
-    margin: $gutter / 2;
+    margin: 2%;
     cursor: pointer;
 
+    // TODO laga þannig að sé háð prósentu
     @media only screen and (max-device-width: 500px) {
-      max-width: 6 * $gutter;
-      max-height: 6 * $gutter;
+      width: 10%;
+      height: 10%;
+      max-width: 2.5 * $gutter;
+      max-height: 2.5 * $gutter;
     }
   }
 }
@@ -68,7 +71,7 @@
     cursor: pointer;
 
     @media only screen and (max-device-width: 500px) {
-      font-size: 1.7 * $gutter;
+      font-size: 140%;
     }
   }
 }
