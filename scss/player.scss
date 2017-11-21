@@ -1,6 +1,5 @@
 @import "scss/variables";
 
-
 .video {
   position: relative;
   width: 94%;
@@ -49,11 +48,11 @@
 
   .button {
     width: 10%;
-    height: 10%;
-    max-width: 3 * $gutter;
-    max-height: 3 * $gutter;
     min-width: 2 * $gutter;
+    max-width: 3 * $gutter;
+    height: 10%;
     min-height: 2 * $gutter;
+    max-height: 3 * $gutter;
     margin: 1%;
     cursor: pointer;
   }
