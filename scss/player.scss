@@ -35,6 +35,10 @@
   overflow-wrap: break-word;
   color: #fff;
   text-align: center;
+
+  @media only screen and (max-device-width: 500px) {
+    font-size: 150%;
+  }
 }
 
 .toolbar {
@@ -44,18 +48,14 @@
   justify-content: center;
 
   .button {
+    width: 10%;
+    height: 10%;
     max-width: 3 * $gutter;
     max-height: 3 * $gutter;
-    margin: 2%;
+    min-width: 2 * $gutter;
+    min-height: 2 * $gutter;
+    margin: 1%;
     cursor: pointer;
-
-    // TODO laga þannig að sé háð prósentu
-    @media only screen and (max-device-width: 500px) {
-      width: 10%;
-      height: 10%;
-      max-width: 2.5 * $gutter;
-      max-height: 2.5 * $gutter;
-    }
   }
 }
 
@@ -71,7 +71,7 @@
     cursor: pointer;
 
     @media only screen and (max-device-width: 500px) {
-      font-size: 140%;
+      font-size: 130%;
     }
   }
 }
