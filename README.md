@@ -8,7 +8,7 @@ _kth130@hi.is og vis32@hi.is_
 
 ## Uppsetning
 
-Keyrið eftirfarandi skipanir í skel að eigin vali, sem er þó með git uppsett:
+Keyrið eftirfarandi skipanir í skel að eigin vali, sem er þó með [git](https://git-scm.com/) uppsett:
 
 ```
 $ git clone https://github.com/VifillS/Gaflari
