@@ -5,8 +5,10 @@ class Player {
     this.video;
   }
 
-  // tekið af 'https://css-tricks.com/snippets/javascript/get-url-variables/'
-  // gerir það sem það segir að það geri
+  /*
+   * tekið af 'https://css-tricks.com/snippets/javascript/get-url-variables/'
+   * gerir það sem það segir að það geri
+   */
   getQueryVariable(variable) {
     const query = window.location.search.substring(1);
     const vars = query.split('&');
@@ -17,9 +19,10 @@ class Player {
     return (false);
   }
 
-  /**
-   * Sækir gögn úr video.json og býr til alla viðeigandi containera
-   * og thumbnails
+  /*
+   * Sækir gögn úr video.json og kallar á fall sem býr til viðeigandi
+   * containera og element úr gögnunum.
+   * Bætir síðan við event listenerum á hnappa og video.
    */
   load() {
     const request = new XMLHttpRequest();
@@ -39,6 +42,10 @@ class Player {
     document.getElementById('back').addEventListener('click', this.back.bind(this));
   }
 
+  /*
+   * Tekur inn video stak úr video.json og býr til viðeignadi header og video element
+   * ef video fannst annars er error síða framkölluð.
+   */
   populate(data) {
     const headEl = document.createElement('h1');
     const vidEl = document.createElement('video');
@@ -66,8 +73,6 @@ class Player {
     }
   }
 
-  // TODO setja video sem class attibute
-
   playPause() {
     if (this.video.paused) {
       this.video.play();
@@ -90,8 +95,6 @@ class Player {
     }
   }
 
-  // tekid af netinu - endurskoda en samt ekki
-  // http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos
   fullscreen() {
     if (this.video.requestFullscreen) {
       this.video.requestFullscreen();
