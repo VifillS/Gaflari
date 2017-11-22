@@ -11,8 +11,8 @@ _kth130@hi.is og vis32@hi.is_
 Keyrið eftirfarandi skipanir í skel að eigin vali, sem er þó með git uppsett:
 
 ```
-$ git clone https://github.com/VifillS/gaflari
-$ cd gaflari
+$ git clone https://github.com/VifillS/Gaflari
+$ cd Gaflari
 ```
 
 ## Notkun
