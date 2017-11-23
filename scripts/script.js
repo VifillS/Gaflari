@@ -14,7 +14,7 @@ class Video {
    */
   load() {
     const request = new XMLHttpRequest();
-    request.open('GET', '/videos.json');
+    request.open('GET', './videos.json');
     request.responseType = 'json';
     request.onload = () => {
       this.data = request.response;

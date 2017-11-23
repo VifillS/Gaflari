@@ -26,7 +26,7 @@ class Player {
    */
   load() {
     const request = new XMLHttpRequest();
-    request.open('GET', '/videos.json');
+    request.open('GET', './videos.json');
     request.responseType = 'json';
     request.send();
     request.onload = () => {
