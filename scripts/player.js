@@ -2,7 +2,7 @@ class Player {
   constructor() {
     this.id = this.getQueryVariable('id');
     this.container = document.querySelector('.video');
-    this.video;
+    this.video = null;
   }
 
   /*

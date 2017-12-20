@@ -26,7 +26,6 @@ class Video {
     };
     request.onerror = () => {
       this.showError('Gat ekki hlaðið gögnum');
-      console.log(this.container);
     };
     request.send();
   }
